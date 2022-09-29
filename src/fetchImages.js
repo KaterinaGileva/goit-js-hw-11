@@ -19,21 +19,12 @@ fetchImages() {
 
    return fetch(url)
     .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      this.incrementPage();
-      console.log("если ок", this);
-      console.log("hi", hits);
-      return console.log("data.hits", data.hits)
-      
+    .then(({ hits }) => {
+      console.log(hits)
+    this.incrementPage();
+     console.log("если ок", this)
+     return hits;
     });
-      
-      //({ images }) => {
-    //  console.log(images)
-  //     this.incrementPage();
-   //    console.log("если ок", this)
-   //    return images;
-//});
 };
 
 incrementPage() {

@@ -24,22 +24,20 @@ function onSearch(e) {
    console.log(imagesApiService.searchQuery);
    console.log(e.currentTarget.elements.searchQuery.value);
    imagesApiService.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
-   console.log(imagesApiService.searchQuery);
-   
+  
    //if (imagesApiService.searchQuery === '') { 
    //
    // }
    imagesApiService.resetPage();
-   imagesApiService.fetchImages();
-   imagesApiService.fetchImages().then(hits => console.log("hits", hits));
-    //clearImagesContainer();
+   //imagesApiService.fetchImages();
+   imagesApiService.fetchImages().then(hits => {
+    clearImagesContainer();
     appendImagesMarkup(hits);
-   //});
+   });
   }
    
   function onloadMore() {
-    imagesApiService.fetchImages().then(hits => console.log(hits));
-    //.then(appendImagesMarkup);
+    imagesApiService.fetchImages().then(appendImagesMarkup);
   }
 
   function appendImagesMarkup(hits) {
@@ -74,14 +72,14 @@ function onSearch(e) {
       }).join("");
    
          refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
-          //refs.galleryContainer.innerHTML = markup;
+         lightbox.refresh();
         }   
 
-//new SimpleLightbox('.gallery a', {
- //captions: true,
-//captionsData: 'alt',
-//captionDelay: 250,
-//});
+        let lightbox = new SimpleLightbox('.photo-card a', {
+          captions: true,
+          captionsData: 'alt',
+          captionDelay: 250,
+        });
 
 
 function clearImagesContainer () {
