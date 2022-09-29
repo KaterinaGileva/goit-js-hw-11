@@ -12,16 +12,28 @@ this.page = 1;
 this.PER_PAGE = 40;
 }
 fetchImages() {
+  console.log ("до запроса", this);
   const url = `${BASE_URL}/?key=${API_KEY}&
-  q=${this.query}&page=${this.page}&per-page=${this.PER_PAGE}
+  q=${this.searchQ}&page=${this.page}&per-page=${this.PER_PAGE}
   &image_type=photo`;
 
    return fetch(url)
     .then(response => response.json())
-    .then(({ images }) => {
-       this.incrementPage();
-       return images;
-});
+    .then(data => {
+      console.log(data);
+      this.incrementPage();
+      console.log("если ок", this);
+      console.log("hi", hits);
+      return console.log("data.hits", data.hits)
+      
+    });
+      
+      //({ images }) => {
+    //  console.log(images)
+  //     this.incrementPage();
+   //    console.log("если ок", this)
+   //    return images;
+//});
 };
 
 incrementPage() {

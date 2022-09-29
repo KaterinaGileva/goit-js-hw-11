@@ -13,6 +13,7 @@ const refs = {
 };
 
 const imagesApiService = new ImagesApiService();
+console.log(imagesApiService);
 
 refs.seachForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onloadMore);
@@ -20,32 +21,37 @@ refs.loadMoreBtn.addEventListener('click', onloadMore);
 
 function onSearch(e) {
    e.preventDefault();
+   console.log(imagesApiService.searchQuery);
+   console.log(e.currentTarget.elements.searchQuery.value);
+   imagesApiService.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+   console.log(imagesApiService.searchQuery);
    
-   imagesApiService.searchQuery = e.currentTarget.elements.searchQuery.value;
    //if (imagesApiService.searchQuery === '') { 
    //
    // }
    imagesApiService.resetPage();
-   imagesApiService.fetchImages().then(elements => {
-    clearImagesContainer();
-    appendImagesMarkup(elements);
-   });
+   imagesApiService.fetchImages();
+   imagesApiService.fetchImages().then(hits => console.log("hits", hits));
+    //clearImagesContainer();
+    appendImagesMarkup(hits);
+   //});
   }
    
   function onloadMore() {
-    imagesApiService.fetchImages().then(appendImagesMarkup);
+    imagesApiService.fetchImages().then(hits => console.log(hits));
+    //.then(appendImagesMarkup);
   }
 
-  function appendImagesMarkup(elements) {
-    const markUp = elements.map(({
+  function appendImagesMarkup(hits) {
+    const markup = hits.map(({
          webformatURL, 
           largeImageURL, 
           tags, 
           likes, 
           views,
           comments,
-          downloads,
-         }) =>{
+          downloads
+         }) => {
          return `<div class="photo-card">
          <a class="gallery__item" href="${largeImageURL}">
          <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy"/>
@@ -64,11 +70,11 @@ function onSearch(e) {
              <b>Downloads:</b>${downloads}
            </p>
          </div>
-       </div>`;
+       </div>`
       }).join("");
    
-         refs.galleryContainer.insertAdjacentHTML('beforeend', markUp);
-         
+         refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
+          //refs.galleryContainer.innerHTML = markup;
         }   
 
 //new SimpleLightbox('.gallery a', {
