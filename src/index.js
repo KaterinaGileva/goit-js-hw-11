@@ -11,16 +11,26 @@ const refs = {
     galleryContainer: document.querySelector(".gallery"),
 };
 let hitSumm = 0;
+const imagesApiService = new ImagesApiService();
+
 const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
 });
 
-const imagesApiService = new ImagesApiService();
 loadMoreBtn.disable();
 
 refs.seachForm.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
+
+// Бесконечного скролла 
+//const options = {
+//  rootMargin: '50px',
+//  root: null,
+//  threshold: 0.3
+//};
+//const observer = new IntersectionObserver(onLoadMore, options);
+//observer.observe(refs.loadMoreBtn);  
 
 function onSearch(e) {
    e.preventDefault();
@@ -30,12 +40,15 @@ function onSearch(e) {
    imagesApiService.resetPage();
 
    if (imagesApiService.searchQuery === '') {
+    loadMoreBtn.disable();
     return Notify.failure
     ('Sorry, there are no images matching your search query.Please try again.');
-   }
+     
+  }
 
    loadMoreBtn.show();
    clearImagesContainer();
+
    hitSumm = 0;
     fetchImages(); 
     appendImagesMarkup(hits);
@@ -66,8 +79,6 @@ async function fetchImages(){
        appendImagesMarkup(hits);
        hitSumm += hits.length;
 
-console.log(hitSumm);
-console.log(total);
     if (hitSumm < total) {
     
         Notify.success(`Hooray! We found ${total} images !!!`);   
@@ -76,9 +87,11 @@ console.log(total);
     }
     
     if (hitSumm >= total) {
+      //loadMoreBtn.disable();
         Notify.info(
             'We re sorry, but you have reached the end of search results.'
-        );
+            
+            );
     }
   }
   
