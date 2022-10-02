@@ -10,9 +10,7 @@ this.PER_PAGE = 40;
 }
 fetchImages() {
   console.log ("до запроса", this);
-  const url = `${BASE_URL}/?key=${API_KEY}&
-  q=${this.searchQ}&page=${this.page}&per-page=${this.PER_PAGE}
-  &image_type=photo&orientation=${this.horizontal}&safesearch${this.true}`;
+  const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQ}&page=${this.page}&per_page=${this.PER_PAGE}&image_type=photo&orientation=${this.horizontal}&safesearch${this.true}`;
 
    return fetch(url)
     .then(response => response.json())

@@ -51,6 +51,7 @@ function onSearch(e) {
       };  
 
       appendImagesMarkup(hits);
+      
       hitSumm += hits.length;
 
     if (hitSumm < total) {
@@ -68,7 +69,6 @@ function onSearch(e) {
   }
 
   function onloadMore() {
-
     imagesApiService.fetchImages().then(appendImagesMarkup);
   }
 
@@ -83,7 +83,6 @@ function onSearch(e) {
           downloads
          }) => {
          return `
-         
          <div class="photo-card">
          <a class="gallery__item" href="${largeImageURL}">
          <img class="photo-img" src="${webformatURL}" alt="${tags}"  width = "320" height = "270" loading="lazy"/>
@@ -116,12 +115,6 @@ function onSearch(e) {
           captionDelay: 250,
         });
 
-       // let photocard = $('.gallery a').simpleLightbox();
-
-       // photocard.refresh(); // Next Image
-
 function clearImagesContainer () {
-
-  refs.galleryContainer.innerHTML = '';
-
+       refs.galleryContainer.innerHTML = '';
 }

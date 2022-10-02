@@ -1,51 +1,68 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
   
-    font-size: 16px;
-    line-height: 1.71;
-    letter-spacing: 0.03em;
+  font-size: 16px;
+  line-height: 1.71;
+  letter-spacing: 0.03em;
     
 }
 
 .search-form {
   display: flex;
   position: fixed;
-  padding: 8px;
+  top: 0;
+  left: 0;
+
   justify-content: center;
+  align-items: center;
   margin-bottom: 50px;
+  padding: 25px 0;
+  width: 100%;
+  background: linear-gradient(90deg,#050b5c,#1a73e8);
   
-    width: 100%;
-    background: linear-gradient(90deg,#050b5c,#1a73e8);
-    
-    align-items: center;
-    padding: 25px 0;
-    
-    top: 0;
-    left: 0;
-    box-shadow: 0 3px 5px rgb(0 4 56 / 50%);
+  box-shadow: 0 3px 5px rgb(0 4 56 / 50%);
 }
 
-.button {
+input {
+  width: 300px;
+  font-size: 16px;
+  font-family: arial;
+}
+
+.btn {
+  height: 23px;
+  font-family: arial;
+  text-align: center;
+  font-size: 16px;
+}
+
+.btn:not(:disabled):not(.disabled){
+  cursor: pointer;
+}
+
+.load-more {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 20px;
+    height: 35px;
+    width: 200px;
     background-color: blue;
     border-color: blue;
     color: white;
-
+    border-radius: 3px;
 }
 
-.button.is-hidden {
+.load-more.is-hidden {
   display: none;
   }
 
-
-.button > .spinner.is-hidden {
+.load-more > .spinner.is-hidden {
   display: none;
+  }
+
+.submit {
+    background-color: rgb(211,211,211);
+    border-color: rgb(211,211,211);
   }
 
 .spinner-border{
@@ -56,32 +73,6 @@ body {
   border-radius: 50%;
   animation: spinner-border 75s linear infinite;
 }
-.btn {
-  height: 23px;
-  text-align: center;
-  font-size: 16px;
-  font-family: arial;
-}
-
-.btn:not(:disabled):not(.disabled){
-  cursor: pointer;
-}
-
-.btn-primary {
-  
-  background-color: rgb(211,211,211);
-  border-color: rgb(211,211,211);
- 
-}
-
-input {
-  width: 300px;
-  font-size: 16px;
-  font-family: arial;
-  
-}
-
-
 
 .gallery {
   padding: 0;
