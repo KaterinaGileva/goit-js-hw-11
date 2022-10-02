@@ -1,3 +1,5 @@
+import axios from "axios";
+
  //import axios from "axios";
  const API_KEY = '30239587-3f20dad8b68c1db6bb7cff5e0';
  const BASE_URL = 'https://pixabay.com/api';
@@ -8,19 +10,31 @@ this.searchQ = "";
 this.page = 1;
 this.PER_PAGE = 40;
 }
-fetchImages() {
-  console.log ("до запроса", this);
-  const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQ}&page=${this.page}&per_page=${this.PER_PAGE}&image_type=photo&orientation=${this.horizontal}&safesearch${this.true}`;
-
-   return fetch(url)
-    .then(response => response.json())
-    .then(({ hits }) => {
-      console.log(hits)
+async fetchImages() {
+  
+  const axiosOptions = {
+    method: 'get',
+    url: 'https://pixabay.com/api/',
+    params: {
+      key: '30239587-3f20dad8b68c1db6bb7cff5e0',
+      q: `${this.searchQ}`,
+      image_type: 'photo',
+      orientation: 'horizontal',
+      safesearch: true,
+      page: `${this.page}`,
+      per_page: `${this.PER_PAGE}`,     
+  }
+  };
+   try{
+    const response = await axios(axiosOptions);
+    const data = response.data;
+    
     this.incrementPage();
-     console.log("если ок", this)
-     return hits;
-    });
-};
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}   
 
 incrementPage() {
   this.page += 1;
@@ -29,6 +43,10 @@ incrementPage() {
 resetPage() {
   this.page = 1;
 }
+
+//resetEndOfHits() {
+ // this.endOfHits = false;
+//}  
 
 get searchQuery() {
 return this.searchQ;
