@@ -8,7 +8,7 @@ import LoadMoreBtn from './load-more-btn';
 const refs = {
     seachForm: document.querySelector('.search-form'),
     loadMoreBtn: document.querySelector('.load-more'),
-    galleryContainer: document.querySelector(".gallery"),
+    galleryContainer: document.querySelector('.gallery'),
 };
 let hitSumm = 0;
 const imagesApiService = new ImagesApiService();
