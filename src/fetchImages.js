@@ -1,10 +1,7 @@
+ //import axios from "axios";
  const API_KEY = '30239587-3f20dad8b68c1db6bb7cff5e0';
  const BASE_URL = 'https://pixabay.com/api';
- //const options ={
- // headers: {
-  //  Authorisation: API_KEY,
- //},
-//}
+ 
  export default class ImagesApiService { 
 constructor () {
 this.searchQ = "";
@@ -15,7 +12,7 @@ fetchImages() {
   console.log ("до запроса", this);
   const url = `${BASE_URL}/?key=${API_KEY}&
   q=${this.searchQ}&page=${this.page}&per-page=${this.PER_PAGE}
-  &image_type=photo`;
+  &image_type=photo&orientation=${this.horizontal}&safesearch${this.true}`;
 
    return fetch(url)
     .then(response => response.json())
