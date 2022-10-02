@@ -9,6 +9,7 @@ const refs = {
     seachForm: document.querySelector('.search-form'),
     loadMoreBtn: document.querySelector('.load-more'),
     galleryContainer: document.querySelector('.gallery'),
+    loadingBtn: document.querySelector('.label'),
 };
 let hitSumm = 0;
 const imagesApiService = new ImagesApiService();
@@ -57,7 +58,7 @@ function onSearch(e) {
 function clearImagesContainer () {
     refs.galleryContainer.innerHTML = '';
 }
-
+ //observer.observe(refs.loadMoreBtn);     
 function onLoadMore() {      
   imagesApiService.incrementPage();
   fetchImages();
@@ -87,7 +88,7 @@ async function fetchImages(){
     }
     
     if (hitSumm >= total) {
-      //loadMoreBtn.disable();
+      refs.loadMoreBtn.classList.add('is-hidden');
         Notify.info(
             'We re sorry, but you have reached the end of search results.'
             

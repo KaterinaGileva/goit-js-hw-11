@@ -44,9 +44,9 @@ resetPage() {
   this.page = 1;
 }
 
-//resetEndOfHits() {
- // this.endOfHits = false;
-//}  
+resetEndOfHits() {
+  this.endOfHits = false;
+}  
 
 get searchQuery() {
 return this.searchQ;
