@@ -51,7 +51,7 @@ function onSearch(e) {
 
    hitSumm = 0;
     fetchImages(); 
-    appendImagesMarkup(hits);
+    //appendImagesMarkup(hits);
    }
 
 function clearImagesContainer () {
