@@ -1,8 +1,4 @@
 import axios from "axios";
-
- //import axios from "axios";
- const API_KEY = '30239587-3f20dad8b68c1db6bb7cff5e0';
- const BASE_URL = 'https://pixabay.com/api';
  
  export default class ImagesApiService { 
 constructor () {
@@ -28,8 +24,6 @@ async fetchImages() {
    try{
     const response = await axios(axiosOptions);
     const data = response.data;
-    
-    this.incrementPage();
     return data;
   } catch (error) {
     console.error(error);
