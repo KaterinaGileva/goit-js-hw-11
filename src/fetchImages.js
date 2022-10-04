@@ -23,6 +23,7 @@ async fetchImages() {
   };
    try{
     const response = await axios(axiosOptions);
+    
     const data = response.data;
     return data;
   } catch (error) {

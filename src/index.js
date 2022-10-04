@@ -24,14 +24,14 @@ loadMoreBtn.disable();
 refs.seachForm.addEventListener('submit', onSearch);
 loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
-// Бесконечного скролла 
+// Бесконечный скролл 
 //const options = {
-//  rootMargin: '50px',
-//  root: null,
-//  threshold: 0.3
+ //rootMargin: '50px',
+  //root: null,
+ // threshold: 0.3
 //};
 //const observer = new IntersectionObserver(onLoadMore, options);
-//observer.observe(refs.loadMoreBtn);  
+  
 
 function onSearch(e) {
    e.preventDefault();
@@ -51,14 +51,15 @@ function onSearch(e) {
    clearImagesContainer();
 
    hitSumm = 0;
-    fetchImages(); 
-    //appendImagesMarkup(hits);
+fetchImages(); 
+   
+    //observer.observe(refs.loadMoreBtn); 
    }
 
 function clearImagesContainer () {
     refs.galleryContainer.innerHTML = '';
 }
- //observer.observe(refs.loadMoreBtn);     
+     
 function onLoadMore() {      
   imagesApiService.incrementPage();
   fetchImages();
@@ -72,7 +73,6 @@ async function fetchImages(){
 
       if (!hits.length) {
         Notify.warning(`Sorry, there are no images matching your search query. Please try again.`);
-        //loadMoreBtn.disable();
         refs.loadMoreBtn.classList.add('is-hidden');
         return;
       };  
@@ -83,7 +83,6 @@ async function fetchImages(){
     if (hitSumm < total) {
     
         Notify.success(`Hooray! We found ${total} images !!!`);   
-        //refs.loadMoreBtn.classList.remove('is-hidden');
         loadMoreBtn.enable();
     }
     
@@ -138,4 +137,3 @@ let lightbox = new SimpleLightbox('.gallery a', {
           captionsData: 'alt',
           captionDelay: 250,
         });
-
